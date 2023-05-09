@@ -12,8 +12,9 @@ import java.util.List;
 public class GameService {
     @Autowired
     private GameRepository gameRepository;
-    public List<Game> findAll(){
+    public List<GameMinDTO> findAll(){
         List<Game> result =  gameRepository.findAll();
-        return result;
+        //Transformando a lista de Game em uma lista de GameDTO para respietar a hierarquia das classes
+        return result.stream().map(x -> new GameMinDTO( (x))).toList();
     }
 }
